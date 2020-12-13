@@ -56,10 +56,24 @@ client.connect((err) => {
         { _id: ObjectId(req.params.id) },
         {
           $set: {
+            ic: req.body.ic,
             name: req.body.name,
+            type: req.body.type,
             email: req.body.email,
             address: req.body.address,
             phone: req.body.phone,
+            DOB: req.body.DOB,
+            gender: req.body.gender,
+            blood: req.body.blood,
+            nationality: req.body.nationality,
+            maritalStatus: req.body.maritalStatus,
+            kids: req.body.kids,
+            religion: req.body.religion,
+            occupation: req.body.occupation,
+            salary: req.body.salary,
+            houseType: req.body.houseType,
+            houseRent: req.body.houseRent,
+            orphan: req.body.orphan,
           },
         }
       )
