@@ -23,6 +23,8 @@ client.connect((err) => {
     .db("smartResidenz")
     .collection("residents");
 
+  const leaderCollection = client.db("smartResidenz").collection("leader");
+
   // to submit details to database
   app.post("/submitDetails", (req, res) => {
     const resident = req.body;
@@ -49,7 +51,7 @@ client.connect((err) => {
 
   // to update residents to database
   app.patch("/updateResident/:id", (req, res) => {
-    console.log(req.body.name);
+    //console.log(req.body.name);
 
     residentsCollection
       .updateOne(
@@ -91,6 +93,15 @@ client.connect((err) => {
         console.log(result);
         //res.send(result.deletedCount > 0);
       });
+  });
+
+  // to verify the leader
+  app.get("/isLeader", (req, res) => {
+    const email = req.query.email;
+    leaderCollection.find({ email: email }).toArray((err, documents) => {
+      res.send(documents.length > 0);
+      //console.log(documents);
+    });
   });
 
   console.log("database connected");
