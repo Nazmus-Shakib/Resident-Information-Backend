@@ -11,6 +11,10 @@ app.use(cors());
 
 const port = 5000;
 
+app.get("/", (req, res) => {
+  res.send("Resident Information System's Backend is running");
+});
+
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.y70ks.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, {
@@ -52,7 +56,6 @@ client.connect((err) => {
   // to update residents to database
   app.patch("/updateResident/:id", (req, res) => {
     //console.log(req.body.name);
-
     residentsCollection
       .updateOne(
         { _id: ObjectId(req.params.id) },
